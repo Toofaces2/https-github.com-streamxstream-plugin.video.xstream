@@ -24,8 +24,9 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
 
 # Domain Abfrage
-DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'streamcloud.best')
+DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'streamcloud.movie')
 URL_MAIN = 'https://' + DOMAIN + '/'
+# URL_MAIN = 'https://streamcloud.movie/'
 URL_MAINPAGE = URL_MAIN + 'streamcloud/'
 URL_MOVIES = URL_MAIN + 'filme-stream/'
 URL_KINO = URL_MAIN + 'kinofilme/'

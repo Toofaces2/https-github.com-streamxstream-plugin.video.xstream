@@ -173,6 +173,7 @@ def showEpisodes(sGui=False):
 
 
 def showSearchEntries(entryUrl=False, sGui=False, sSearchText=''):
+
     oGui = sGui if sGui else cGui()
     params = ParameterHandler()
     # Parameter laden
@@ -232,7 +233,7 @@ def showHosters(sGui=False):
     for i in aResults:
         sName = i['name'].split('-')[0].strip()
         sQuality = str(i['quality'])
-        if sQuality != '': sQuality = '720p'
+        if 'None' in sQuality: sQuality = '720p'
         sUrl = i['src']
         if cConfig().isBlockedHoster(sUrl)[0]: continue  # Hoster aus settings.xml oder deaktivierten Resolver ausschließen
         if 'youtube' in sUrl: continue # Trailer ausblenden

@@ -1,4 +1,19 @@
-[B]Version: 4.0.8~nightly6[/B]
+[B]Version: 4.0.8~nightly7[/B]
+
+01.01.2024
+
+ - [Cineclix] Film bzw. Serienmenü erstellt 
+   (kleines) Genre (ohne Filterfunktion) hinzugefügt
+   Anpassung Qualitätsanzeige
+ - [Cinemathek] Fix: Nächste Seite 
+   Anpassung Qualitätsanzeige
+   Neue Episoden überarbeitet
+ - [HDFilme] Aktualisierung der Domain
+ - [Kino] Aktualisierung der Domain
+ - [Moflix-Stream] Anpassung Qualitätsanzeige
+ - [Movie4k] Aktualisierung der Domain
+ - [Streamcloud] Aktualisierung der Domain
+ - [xCine] Überflüssigen Code entfernt
 
 02.12.2023
 

@@ -1188,6 +1188,22 @@ msgctxt "#30538"
 msgid " Country"
 msgstr ""
 
+msgctxt "#30539"
+msgid "Top 10 films this week"
+msgstr ""
+
+msgctxt "#30540"
+msgid "Top 10 series this week"
+msgstr ""
+
+msgctxt "#30541"
+msgid "New Movies"
+msgstr ""
+
+msgctxt "#30542"
+msgid "All Movies"
+msgstr ""
+
 ############### Site Plugins ###############
 
 msgctxt "#30700"
@@ -1304,4 +1320,34 @@ msgstr ""
 
 msgctxt "#30728"
 msgid "Moflix-Stream"
+msgstr ""
+
+############### Genre ###############
+
+msgctxt "#30800"
+msgid "Action"
+msgstr ""
+
+msgctxt "#30801"
+msgid "Animation"
+msgstr ""
+
+msgctxt "#30802"
+msgid "Horror"
+msgstr ""
+
+msgctxt "#30803"
+msgid "Comedy"
+msgstr ""
+
+msgctxt "#30804"
+msgid "Love film"
+msgstr ""
+
+msgctxt "#30805"
+msgid "Music film"
+msgstr ""
+
+msgctxt "#30806"
+msgid "SciFi film"
 msgstr ""
