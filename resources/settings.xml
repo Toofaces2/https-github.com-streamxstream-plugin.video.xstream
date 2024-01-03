@@ -176,6 +176,7 @@
 						</options>
 					</constraints>
 					<dependencies>
+						<dependency type="visible" setting="githubUpdateXstream">true</dependency>
 						<dependency type="visible" setting="xstream.branch">release</dependency>
 					</dependencies>
 					<control type="spinner" format="string"/>
