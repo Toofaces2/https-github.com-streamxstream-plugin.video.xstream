@@ -26,26 +26,46 @@ LOGMESSAGE = cConfig().getLocalizedString(30166)
 
 # Resolver
 def resolverUpdate(silent=False):
-    username = 'fetchdevteam'
-    resolve_dir = 'snipsolver'
-    resolve_id = 'script.module.resolveurl'
-    # Abfrage aus den Einstellungen welcher Branch
-    branch = Addon().getSettingString('resolver.branch')
-    token = ''
+    # Nightly Branch
+    if Addon().getSetting('resolver.branch') == 'nightly':
+        username = 'fetchdevteam'
+        resolve_dir = 'snipsolver'
+        resolve_id = 'script.module.resolveurl'
+        # Abfrage aus den Einstellungen welcher Branch
+        branch = 'nightly'
+        token = ''
 
-    try:
-        return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
-    except Exception as e:
-        log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
-        Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
-        return
+        try:
+            return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
+        except Exception as e:
+            log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
+            Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
+            return
+    else:
+        # Release Branch https://github.com/Gujal00/ResolveURL
+        username = 'Gujal00'
+        resolve_dir = 'ResolveURL'
+        resolve_id = 'script.module.resolveurl'
+        # Abfrage aus den Einstellungen welcher Branch
+        branch = 'master'
+        token = ''
+
+        try:
+            return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
+        except Exception as e:
+            log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
+            Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
+            return
 
 # xStream
 def xStreamUpdate(silent=False):
     username = 'streamxstream'
     plugin_id = 'plugin.video.xstream'
     # Abfrage aus den Einstellungen welcher Branch
-    branch = Addon().getSettingString('xstream.branch')   
+    if Addon().getSetting('resolver.branch') == 'release':
+        branch = Addon().getSettingString('xstream.branch.release')
+    else:
+        branch = 'nightly'
     token = ''
     try:
         return Update(username, plugin_id, branch, token, silent)
