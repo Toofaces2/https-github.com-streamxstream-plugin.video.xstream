@@ -567,7 +567,7 @@
 					</dependencies>
 					<control type="toggle"/>
 				</setting>
-
+				<!-- Domain Überprüfung mit automatischer und manueller Anpassung -->
 				<setting id="plugin_hdfilme_checkDomain" type="boolean" label="30277">
 					<level>3</level>
 					<default>True</default>

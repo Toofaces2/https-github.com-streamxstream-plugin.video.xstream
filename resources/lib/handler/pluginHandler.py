@@ -172,7 +172,7 @@ class cPluginHandler:
                     if xbmcaddon.Addon().getSetting('plugin_' + provider) == 'false':  # Wenn SitePlugin deaktiviert
                         cConfig().setSetting('global_search_' + provider, 'false')  # setzte Globale Suche auf aus
                         cConfig().setSetting('plugin_' + provider + '_checkdomain', 'false')  # setzte Domain Check auf aus
-                        cConfig().setSetting('plugin_' + provider + '.domain', ' ')  # lösche Settings Eintrag
+                        xbmcaddon.Addon().setSetting('plugin_' + provider + '.domain', '')  # lösche Settings Eintrag
 
                     if xbmcaddon.Addon().getSetting('plugin_' + provider + '_checkdomain') == 'true':  # aut. Domainüberprüfung an ist überprüfe Status der Sitplugins
                         oRequest = cRequestHandler(base_link, caching=False, ignoreErrors=True)
@@ -198,11 +198,11 @@ class cPluginHandler:
                         else:
                             log(LOGMESSAGE + ' -> [checkDomain]: Error ' + provider + ' not available.', LOGNOTICE)
                             cConfig().setSetting('global_search_' + provider, 'false')  # deaktiviere Globale Suche
-                            cConfig().setSetting('plugin_' + provider + '.domain', ' ')  # lösche Settings Eintrag
+                            xbmcaddon.Addon().setSetting('plugin_' + provider + '.domain', '')  # lösche Settings Eintrag
                             log(LOGMESSAGE + ' -> [checkDomain]: globalSearch for ' + provider + ' is deactivated.', LOGNOTICE)
                 except:
                     cConfig().setSetting('global_search_' + provider, 'false')  # deaktiviere Globale Suche
-                    cConfig().setSetting('plugin_' + provider + '.domain', ' ')  # lösche Settings Eintrag
+                    xbmcaddon.Addon().setSetting('plugin_' + provider + '.domain', '')  # lösche Settings Eintrag
                     log(LOGMESSAGE + ' -> [checkDomain]: Error ' + provider + ' not available.', LOGNOTICE)
                     pass
             except Exception:
