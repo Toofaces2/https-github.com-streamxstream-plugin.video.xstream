@@ -5,7 +5,6 @@ import os
 import shutil
 import json
 import requests
-import xbmc, xbmcvfs
 import zipfile
 
 from xbmcaddon import Addon
@@ -333,9 +332,9 @@ def devUpdates():  # für manuelles Updates vorgesehen
                                     nolabel='Release')
 
             if result == 0:
-                sBranchResolverRelease = Addon().setSetting('resolver.branch', 'release')
+                Addon().setSetting('resolver.branch', 'release')
             elif result == 1:
-                sBranchResolverNightly = Addon().setSetting('resolver.branch', 'nightly')
+                Addon().setSetting('resolver.branch', 'nightly')
 
             # Voreinstellung beendet
             if Dialog().yesno(HEADERMESSAGE, cConfig().getLocalizedString(30269),
