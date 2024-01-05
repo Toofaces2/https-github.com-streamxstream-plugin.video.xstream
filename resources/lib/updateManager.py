@@ -301,10 +301,10 @@ def devUpdates():  # für manuelles Updates vorgesehen
         elif result == 1:  # xStream aktualisieren
             # Abfrage ob xStream Release oder Nightly Branch (kann erweitert werden)
             Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30155))
-            options = ['xStream Release Kodi 19.x Matrix',
-                       'xStream Release Kodi 20.x Nexus',
-                       'xStream Release Kodi 21.x Omega',
-                       'xStream Nightly Kodi 20.x Nexus']
+            options = ['xStream Release (Kodi 19.x)',
+                       'xStream Release (Kodi 20.x)',
+                       'xStream Pre Alpha (Kodi 21.x)',
+                       'xStream Nightly (Kodi 20.x)']
             result = Dialog().select(HEADERMESSAGE, options)
             if result == 0:
                 Addon().setSetting('xstream.branch.release', 'matrix')
