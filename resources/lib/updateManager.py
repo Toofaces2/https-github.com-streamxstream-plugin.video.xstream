@@ -28,30 +28,30 @@ LOGMESSAGE = cConfig().getLocalizedString(30166)
 def resolverUpdate(silent=False):
     # Nightly Branch
     if Addon().getSetting('resolver.branch') == 'nightly':
-        username = 'fetchdevteam'
+        resolve_username = 'fetchdevteam'
         resolve_dir = 'snipsolver'
         resolve_id = 'script.module.resolveurl'
         # Abfrage aus den Einstellungen welcher Branch
-        branch = 'nightly'
-        token = ''
+        resolve_branch = 'nightly'
+        resolve_token = ''
 
         try:
-            return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
+            return UpdateResolve(resolve_username, resolve_dir, resolve_id, resolve_branch, resolve_token, silent)
         except Exception as e:
             log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
             Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
             return
     else:
         # Release Branch https://github.com/Gujal00/ResolveURL
-        username = 'Gujal00'
+        resolve_username = 'Gujal00'
         resolve_dir = 'ResolveURL'
         resolve_id = 'script.module.resolveurl'
         # Abfrage aus den Einstellungen welcher Branch
-        branch = 'master'
-        token = ''
+        resolve_branch = 'master'
+        resolve_token = ''
 
         try:
-            return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
+            return UpdateResolve(resolve_username, resolve_dir, resolve_id, resolve_branch, resolve_token, silent)
         except Exception as e:
             log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
             Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
@@ -75,14 +75,14 @@ def xStreamUpdate(silent=False):
         return False
 
 # Update Resolver
-def UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent):
-    REMOTE_PLUGIN_COMMITS = "https://api.github.com/repos/%s/%s/commits/%s" % (username, resolve_dir, branch)   # Github Commits
-    REMOTE_PLUGIN_DOWNLOADS = "https://api.github.com/repos/%s/%s/zipball/%s" % (username, resolve_dir, branch) # Github Downloads
+def UpdateResolve(resolve_username, resolve_dir, resolve_id, resolve_branch, resolve_token, silent):
+    REMOTE_PLUGIN_COMMITS = "https://api.github.com/repos/%s/%s/commits/%s" % (resolve_username, resolve_dir, resolve_branch)   # Github Commits
+    REMOTE_PLUGIN_DOWNLOADS = "https://api.github.com/repos/%s/%s/zipball/%s" % (resolve_username, resolve_dir, resolve_branch) # Github Downloads
     PACKAGES_PATH = translatePath(os.path.join('special://home/addons/packages/'))  # Packages Ordner für Downloads
     ADDON_PATH = translatePath(os.path.join('special://home/addons/packages/', '%s') % resolve_id)  # Addon Ordner in Packages
     INSTALL_PATH = translatePath(os.path.join('special://home/addons/', '%s') % resolve_id) # Installation Ordner
     
-    auth = HTTPBasicAuth(username, token)
+    auth = HTTPBasicAuth(resolve_username, resolve_token)
     log(LOGMESSAGE + ' -> [updateManager]: %s: - Search for updates.' % resolve_id, LOGNOTICE)
     try:
         ADDON_DIR = translatePath(os.path.join('special://userdata/addon_data/', '%s') % resolve_id) # Pfad von ResolveURL Daten
