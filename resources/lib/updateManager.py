@@ -2,8 +2,6 @@
 # Python 3
 
 import os
-import base64
-import sys
 import shutil
 import json
 import requests
@@ -28,30 +26,30 @@ LOGMESSAGE = cConfig().getLocalizedString(30166)
 def resolverUpdate(silent=False):
     # Nightly Branch
     if Addon().getSetting('resolver.branch') == 'nightly':
-        resolve_username = 'fetchdevteam'
+        username = 'fetchdevteam'
         resolve_dir = 'snipsolver'
         resolve_id = 'script.module.resolveurl'
         # Abfrage aus den Einstellungen welcher Branch
-        resolve_branch = 'nightly'
-        resolve_token = ''
+        branch = 'nightly'
+        token = ''
 
         try:
-            return UpdateResolve(resolve_username, resolve_dir, resolve_id, resolve_branch, resolve_token, silent)
+            return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
         except Exception as e:
             log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
             Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
             return
     else:
         # Release Branch https://github.com/Gujal00/ResolveURL
-        resolve_username = 'Gujal00'
+        username = 'Gujal00'
         resolve_dir = 'ResolveURL'
         resolve_id = 'script.module.resolveurl'
         # Abfrage aus den Einstellungen welcher Branch
-        resolve_branch = 'master'
-        resolve_token = ''
+        branch = 'master'
+        token = ''
 
         try:
-            return UpdateResolve(resolve_username, resolve_dir, resolve_id, resolve_branch, resolve_token, silent)
+            return UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent)
         except Exception as e:
             log(' -> [updateManager]: Exception Raised: %s' % str(e), LOGERROR)
             Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30156) + resolve_id + cConfig().getLocalizedString(30157))
@@ -75,14 +73,14 @@ def xStreamUpdate(silent=False):
         return False
 
 # Update Resolver
-def UpdateResolve(resolve_username, resolve_dir, resolve_id, resolve_branch, resolve_token, silent):
-    REMOTE_PLUGIN_COMMITS = "https://api.github.com/repos/%s/%s/commits/%s" % (resolve_username, resolve_dir, resolve_branch)   # Github Commits
-    REMOTE_PLUGIN_DOWNLOADS = "https://api.github.com/repos/%s/%s/zipball/%s" % (resolve_username, resolve_dir, resolve_branch) # Github Downloads
+def UpdateResolve(username, resolve_dir, resolve_id, branch, token, silent):
+    REMOTE_PLUGIN_COMMITS = "https://api.github.com/repos/%s/%s/commits/%s" % (username, resolve_dir, branch)   # Github Commits
+    REMOTE_PLUGIN_DOWNLOADS = "https://api.github.com/repos/%s/%s/zipball/%s" % (username, resolve_dir, branch) # Github Downloads
     PACKAGES_PATH = translatePath(os.path.join('special://home/addons/packages/'))  # Packages Ordner für Downloads
     ADDON_PATH = translatePath(os.path.join('special://home/addons/packages/', '%s') % resolve_id)  # Addon Ordner in Packages
     INSTALL_PATH = translatePath(os.path.join('special://home/addons/', '%s') % resolve_id) # Installation Ordner
     
-    auth = HTTPBasicAuth(resolve_username, resolve_token)
+    auth = HTTPBasicAuth(username, token)
     log(LOGMESSAGE + ' -> [updateManager]: %s: - Search for updates.' % resolve_id, LOGNOTICE)
     try:
         ADDON_DIR = translatePath(os.path.join('special://userdata/addon_data/', '%s') % resolve_id) # Pfad von ResolveURL Daten
@@ -244,4 +242,123 @@ def zipfolder(foldername, target_dir):
             zipobj.write(fn, fn[rootlen:])
     zipobj.close()
 
-    
+
+def devUpdates():  # für manuelles Updates vorgesehen
+    try:
+        resolverupdate = False
+        pluginupdate = False
+        # Einleitungstext
+        if Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30152)):
+            # Abfrage welches Plugin aktualisiert werden soll (kann erweitert werden)
+            options = [cConfig().getLocalizedString(30153),
+                       cConfig().getLocalizedString(30096) + ' ' + cConfig().getLocalizedString(30154),
+                       cConfig().getLocalizedString(30030) + ' ' + cConfig().getLocalizedString(30154)]
+            result = Dialog().select(HEADERMESSAGE, options)
+        else:
+            return False
+
+        if result == -1:  # Abbrechen
+            return False
+
+        elif result == 0:  # Alle Addons aktualisieren
+            # Abfrage ob xStream Release oder Nightly Branch (kann erweitert werden)
+            Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30155))
+            options = ['xStream Release Kodi 19.x Matrix',
+                       'xStream Release Kodi 20.x Nexus',
+                       'xStream Release Kodi 21.x Omega',
+                       'xStream Nightly Kodi 20.x Nexus']
+            result = Dialog().select(HEADERMESSAGE, options)
+            if result == 0:
+                Addon().setSetting('xstream.branch.release', 'matrix')
+                Addon().setSetting('xstream.branch', 'release')
+            elif result == 1:
+                Addon().setSetting('xstream.branch.release', 'nexus')
+                Addon().setSetting('xstream.branch', 'release')
+            elif result == 2:
+                Addon().setSetting('xstream.branch.release', 'omega')
+                Addon().setSetting('xstream.branch', 'release')
+            elif result == 3:
+                Addon().setSetting('xstream.branch', 'nightly')
+
+            # Abfrage ob ResolveURL Release oder Nightly Branch (kann erweitert werden)
+            result = Dialog().yesno(HEADERMESSAGE, cConfig().getLocalizedString(30268), yeslabel='Nightly',
+                                    nolabel='Release')
+            if result == 0:
+                Addon().setSetting('resolver.branch', 'release')
+            elif result == 1:
+                Addon().setSetting('resolver.branch', 'nightly')
+
+            # Voreinstellung beendet
+            if Dialog().yesno(HEADERMESSAGE, cConfig().getLocalizedString(30269),
+                              yeslabel=cConfig().getLocalizedString(30162),
+                              nolabel=cConfig().getLocalizedString(30163)):
+                # Updates ausführen
+                pluginupdate = True
+                resolverupdate = True
+            else:
+                return False
+
+        elif result == 1:  # xStream aktualisieren
+            # Abfrage ob xStream Release oder Nightly Branch (kann erweitert werden)
+            Dialog().ok(HEADERMESSAGE, cConfig().getLocalizedString(30155))
+            options = ['xStream Release Kodi 19.x Matrix',
+                       'xStream Release Kodi 20.x Nexus',
+                       'xStream Release Kodi 21.x Omega',
+                       'xStream Nightly Kodi 20.x Nexus']
+            result = Dialog().select(HEADERMESSAGE, options)
+            if result == 0:
+                Addon().setSetting('xstream.branch.release', 'matrix')
+                Addon().setSetting('xstream.branch', 'release')
+            elif result == 1:
+                Addon().setSetting('xstream.branch.release', 'nexus')
+                Addon().setSetting('xstream.branch', 'release')
+            elif result == 2:
+                Addon().setSetting('xstream.branch.release', 'omega')
+                Addon().setSetting('xstream.branch', 'release')
+            elif result == 3:
+                Addon().setSetting('xstream.branch', 'nightly')
+
+            # Voreinstellung beendet
+            if Dialog().yesno(HEADERMESSAGE, cConfig().getLocalizedString(30269),
+                              yeslabel=cConfig().getLocalizedString(30162),
+                              nolabel=cConfig().getLocalizedString(30163)):
+                # Updates ausführen
+                pluginupdate = True
+            else:
+                return False
+
+        elif result == 2:  # Resolver aktualisieren
+            # Abfrage ob ResolveURL Release oder Nightly Branch (kann erweitert werden)
+            result = Dialog().yesno(HEADERMESSAGE, cConfig().getLocalizedString(30268), yeslabel='Nightly',
+                                    nolabel='Release')
+
+            if result == 0:
+                sBranchResolverRelease = Addon().setSetting('resolver.branch', 'release')
+            elif result == 1:
+                sBranchResolverNightly = Addon().setSetting('resolver.branch', 'nightly')
+
+            # Voreinstellung beendet
+            if Dialog().yesno(HEADERMESSAGE, cConfig().getLocalizedString(30269),
+                              yeslabel=cConfig().getLocalizedString(30162),
+                              nolabel=cConfig().getLocalizedString(30163)):
+                # Updates ausführen
+                resolverupdate = True
+            else:
+                return False
+
+        if pluginupdate is True:
+            try:
+                xStreamUpdate(False)
+            except:
+                pass
+        if resolverupdate is True:
+            try:
+                resolverUpdate(False)
+            except:
+                pass
+
+        # Zurücksetzten der Update.sha
+        if Addon().getSetting('enforceUpdate') == 'true': Addon().setSetting('enforceUpdate', 'false')
+        return
+    except Exception as e:
+        log(e)
