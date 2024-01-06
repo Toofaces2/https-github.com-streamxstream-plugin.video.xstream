@@ -7,16 +7,32 @@
  - [Updatemanager] überarbeitet für Resolver Update und xStream Versionen
  - [Settings] angepasst für xStream Versionen
  - [Sprachdateien] hinzugefügt (Nach Update Neustart erforderlich)
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 01.01.2024
 
- - [Cinemathek] Fix: Nächste Seite, Qualitätsanzeige, Neue Episoden
- - [Cineclix] deaktiviert
+ - [Cineclix] Film bzw. Serienmenü erstellt 
+   (kleines) Genre (ohne Filterfunktion) hinzugefügt
+   Anpassung Qualitätsanzeige
+ - [Cinemathek] Fix: Nächste Seite 
+   Anpassung Qualitätsanzeige
+   Neue Episoden überarbeitet
+ - [HDFilme] Aktualisierung der Domain
+ - [Kino] Aktualisierung der Domain
+ - [Moflix-Stream] Anpassung Qualitätsanzeige
+ - [Movie4k] Aktualisierung der Domain
+ - [Streamcloud] Aktualisierung der Domain
+ - [xCine] Überflüssigen Code entfernt
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 02.12.2023
 
  - [moflix-stream] Fix: Staffeln mit mehr als 30 Episoden wurden nicht korrekt angezeigt
  - [Movieking.cc] deaktiviert
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 25.11.2023
 
