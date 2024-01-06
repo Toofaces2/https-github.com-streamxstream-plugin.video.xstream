@@ -1,5 +1,12 @@
-[B]Version: 4.0.8[/B]
+[B]Version: 4.0.9 Nightly 1[/B]
 
+06.01.2024
+
+ - [Filmkiste] Seite hinzugefügt
+ - [Sprachdateien] hinzugefügt (Nach Update Neustart erforderlich)
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
+ 
 05.01.2024
 
  - [HDFilme] letzte Domain offline (Wechsel auf www.hdfilme.tel)

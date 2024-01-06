@@ -1230,7 +1230,7 @@ msgid "HD-Filme"
 msgstr ""
 
 msgctxt "#30705"
-msgid ""
+msgid "Filmkiste"
 msgstr ""
 
 msgctxt "#30706"
