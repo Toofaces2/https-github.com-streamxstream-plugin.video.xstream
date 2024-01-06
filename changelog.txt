@@ -1,4 +1,14 @@
-[B]Version: 4.0.8~nightly7[/B]
+[B]Version: 4.0.8[/B]
+
+05.01.2024
+
+ - [HDFilme] letzte Domain offline (Wechsel auf www.hdfilme.tel)
+ - [CheckDomain] überarbeitet. Wenn Seite nicht erreichbar dann Domain löschen.
+ - [Updatemanager] überarbeitet für Resolver Update und xStream Versionen
+ - [Settings] angepasst für xStream Versionen
+ - [Sprachdateien] hinzugefügt (Nach Update Neustart erforderlich)
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 01.01.2024
 
@@ -14,11 +24,15 @@
  - [Movie4k] Aktualisierung der Domain
  - [Streamcloud] Aktualisierung der Domain
  - [xCine] Überflüssigen Code entfernt
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 02.12.2023
 
  - [moflix-stream] Fix: Staffeln mit mehr als 30 Episoden wurden nicht korrekt angezeigt
  - [Movieking.cc] deaktiviert
+ 
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 25.11.2023
 

@@ -1029,6 +1029,10 @@ msgctxt "#30405"
 msgid "HTML cache folder has been cleaned"
 msgstr "HTML Cache Ordner wurde bereinigt"
 
+msgctxt "#30406"
+msgid "Choose xStream Version"
+msgstr "Wähle xStream Version"
+
 ############### Scaper Language ###############
 
 msgctxt "#30500"
