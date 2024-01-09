@@ -1,4 +1,14 @@
-[B]Version: 4.0.9 Nightly 1[/B]
+[B]Version: 4.0.9 Nightly 2[/B]
+
+09.01.2024
+
+ - [CineClix] Genre erweitert (THX TimeLance89)
+ - [Sprachdateien] hinzugefügt (Nach Update Neustart erforderlich)
+ - [Service] Abfrage Kodi Version und setze Release Branch in den settings
+ - [HDFilme] Aktualisierung Domain
+ - [KKiste] Aktualisierung Domain
+
+ [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 06.01.2024
 

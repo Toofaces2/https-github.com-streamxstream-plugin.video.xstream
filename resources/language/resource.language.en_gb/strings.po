@@ -1355,3 +1355,27 @@ msgstr ""
 msgctxt "#30806"
 msgid "SciFi film"
 msgstr ""
+
+msgctxt "#30807"
+msgid "Adventure"
+msgstr ""
+
+msgctxt "#30808"
+msgid "Cinema film"
+msgstr ""
+
+msgctxt "#30809"
+msgid "War film"
+msgstr ""
+
+msgctxt "#30810"
+msgid "Crime"
+msgstr ""
+
+msgctxt "#30811"
+msgid "Thriller"
+msgstr ""
+
+msgctxt "#30812"
+msgid "Western film"
+msgstr ""

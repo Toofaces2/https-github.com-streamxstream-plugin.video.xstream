@@ -38,13 +38,7 @@ URL_TOP_SERIES = URL_MAIN + '/api/v1/channel/top-10-serien-diese-woche?channelTy
 URL_NEW_SERIES = URL_MAIN + '/api/v1/channel/neue-serien?channelType=channel&restriction=&paginate=simple'
 URL_SEARCH = URL_MAIN + 'api/v1/search/%s?query=%s&limit=8'
 # Genre
-URL_ACTION = URL_MAIN + 'api/v1/channel/action-filme?channelType=channel&restriction=&paginate=simple'
-URL_ANIMATION = URL_MAIN + 'api/v1/channel/animations-filme?channelType=channel&restriction=&paginate=simple'
-URL_HORROR = URL_MAIN + 'api/v1/channel/horror-filme?channelType=channel&restriction=&paginate=simple'
-URL_KOMOEDIE = URL_MAIN + 'api/v1/channel/komoedien-filme?channelType=channel&restriction=&paginate=simple'
-URL_LOVE = URL_MAIN + 'api/v1/channel/gefuehlskino-herzklopfen-inklusive?channelType=channel&restriction=&paginate=simple'
-URL_MUSIC = URL_MAIN + 'api/v1/channel/musik?channelType=channel&restriction=&paginate=simple'
-URL_SCIFI = URL_MAIN + 'api/v1/channel/kosmische-erzaehlungen?channelType=channel&restriction=&paginate=simple'
+URL_VALUE = URL_MAIN + 'api/v1/channel/%s?channelType=channel&restriction=&paginate=simple'
 # Hoster
 URL_HOSTER = URL_MAIN + 'api/v1/titles/%s?load=images,genres,productionCountries,keywords,videos,primaryVideo,seasons,compactCredits'
 
@@ -59,6 +53,7 @@ def load():
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30520), SITE_IDENTIFIER, 'showSearch'))  # Search
     cGui().setEndOfDirectory()
 
+
 def showMovieMenu():    # Menu structure of movie menu
     params = ParameterHandler()
     params.setParam('sUrl', URL_NEW_MOVIES)
@@ -68,6 +63,7 @@ def showMovieMenu():    # Menu structure of movie menu
     params.setParam('sUrl', URL_TOP_MOVIES)
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30539), SITE_IDENTIFIER, 'showEntries'), params)  # Top Movies
     cGui().setEndOfDirectory()
+
 
 def showSeriesMenu():   # Menu structure of series menu
     params = ParameterHandler()
@@ -79,23 +75,37 @@ def showSeriesMenu():   # Menu structure of series menu
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30540), SITE_IDENTIFIER, 'showEntries'), params)  # Top Series
     cGui().setEndOfDirectory()
 
+
 def showGenre():
     params = ParameterHandler()
-    params.setParam('sUrl', URL_ACTION)
+    params.setParam('sUrl', URL_VALUE % 'action-filme')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30800), SITE_IDENTIFIER, 'showEntries'), params)  # Action
-    params.setParam('sUrl', URL_ANIMATION)
+    params.setParam('sUrl', URL_VALUE % 'animations-filme')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30801), SITE_IDENTIFIER, 'showEntries'), params)  # Animation
-    params.setParam('sUrl', URL_HORROR)
+    params.setParam('sUrl', URL_VALUE % 'abenteuer')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30807), SITE_IDENTIFIER, 'showEntries'), params)  # Abenteuer
+    params.setParam('sUrl', URL_VALUE % 'horror-filme')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30802), SITE_IDENTIFIER, 'showEntries'), params)  # Horror
-    params.setParam('sUrl', URL_KOMOEDIE)
+    params.setParam('sUrl', URL_VALUE % 'kino-filme-banner')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30808), SITE_IDENTIFIER, 'showEntries'), params)  # Kino
+    params.setParam('sUrl', URL_VALUE % 'komoedien-filme')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30803), SITE_IDENTIFIER, 'showEntries'), params)  # Comedy
-    params.setParam('sUrl', URL_LOVE)
+    params.setParam('sUrl', URL_VALUE % 'kriegsfilm')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30809), SITE_IDENTIFIER, 'showEntries'), params)  # War
+    params.setParam('sUrl', URL_VALUE % 'krimi')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30810), SITE_IDENTIFIER, 'showEntries'), params)  # Crime
+    params.setParam('sUrl', URL_VALUE % 'gefuehlskino-herzklopfen-inklusive')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30804), SITE_IDENTIFIER, 'showEntries'), params)  # Love
-    params.setParam('sUrl', URL_MUSIC)
+    params.setParam('sUrl', URL_VALUE % 'musik')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30805), SITE_IDENTIFIER, 'showEntries'), params)  # Music
-    params.setParam('sUrl', URL_SCIFI)
+    params.setParam('sUrl', URL_VALUE % 'kosmische-erzaehlungen')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30806), SITE_IDENTIFIER, 'showEntries'), params)  # SciFi
+    params.setParam('sUrl', URL_VALUE % 'thriller')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30811), SITE_IDENTIFIER, 'showEntries'), params)  # Thriller
+    params.setParam('sUrl', URL_VALUE % 'western')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30812), SITE_IDENTIFIER, 'showEntries'), params)  # Western
     cGui().setEndOfDirectory()
+
 
 def showEntries(entryUrl=False, sGui=False):
     oGui = sGui if sGui else cGui()
