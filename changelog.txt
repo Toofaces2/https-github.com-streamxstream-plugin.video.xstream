@@ -1,4 +1,10 @@
-[B]Version: 4.0.9 Nightly 2[/B]
+[B]Version: 4.0.9 Nightly 3[/B]
+
+12.01.2024
+
+ - [Internet Archive] Seite hinzugefügt (Suchmaschine)
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 09.01.2024
 
@@ -8,14 +14,14 @@
  - [HDFilme] Aktualisierung Domain
  - [KKiste] Aktualisierung Domain
 
- [COLOR cyan]________________________________________________________________________________________[/COLOR]
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 06.01.2024
 
  - [Filmkiste] Seite hinzugefügt
  - [Sprachdateien] hinzugefügt (Nach Update Neustart erforderlich)
  
- [COLOR cyan]________________________________________________________________________________________[/COLOR]
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
  
 05.01.2024
 
@@ -25,7 +31,7 @@
  - [Settings] angepasst für xStream Versionen
  - [Sprachdateien] hinzugefügt (Nach Update Neustart erforderlich)
  
- [COLOR cyan]________________________________________________________________________________________[/COLOR]
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 01.01.2024
 
@@ -42,14 +48,14 @@
  - [Streamcloud] Aktualisierung der Domain
  - [xCine] Überflüssigen Code entfernt
  
- [COLOR cyan]________________________________________________________________________________________[/COLOR]
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 02.12.2023
 
  - [moflix-stream] Fix: Staffeln mit mehr als 30 Episoden wurden nicht korrekt angezeigt
  - [Movieking.cc] deaktiviert
  
- [COLOR cyan]________________________________________________________________________________________[/COLOR]
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 25.11.2023
 
