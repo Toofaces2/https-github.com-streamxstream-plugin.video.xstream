@@ -5,6 +5,7 @@
  - [KinoGer] Stream HD+ von KinoGer hinzugefügt
    Siteplugin komplett überarbeitet
    THX an Loki1979 für dein Decryptor
+ - [UpdateManager] Manuelles Update überarbeitet
 
 [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
