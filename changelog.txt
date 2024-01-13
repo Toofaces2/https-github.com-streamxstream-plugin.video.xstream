@@ -1,4 +1,12 @@
-[B]Version: 4.0.9 Nightly 3[/B]
+[B]Version: 4.0.9 Nightly 4[/B]
+
+13.01.2024
+
+ - [KinoGer] Stream HD+ von KinoGer hinzugefügt
+   Siteplugin komplett überarbeitet
+   THX an Loki1979 für dein Decryptor
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 12.01.2024
 

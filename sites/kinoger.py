@@ -9,16 +9,16 @@
 
 import base64
 import binascii
-import random
-import string
+import hashlib
+import re
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
 from resources.lib.handler.requestHandler import cRequestHandler
-from resources.lib.tools import logger, cParser, cUtil
+from resources.lib.tools import logger, cParser
 from resources.lib.gui.guiElement import cGuiElement
 from resources.lib.config import cConfig
 from resources.lib.gui.gui import cGui
-from resources.lib import jsunpacker
+from resources.lib import pyaes
 from itertools import zip_longest as ziplist
 
 SITE_IDENTIFIER = 'kinoger'
@@ -247,7 +247,8 @@ def showEpisodes():
 
 def showHosters():
     hosters = []
-    headers = '&Accept-Language=de%2Cen-US%3Bq%3D0.7%2Cen%3Bq%3D0.3&Accept=%2A%2F%2A&User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A99.0%29+Gecko%2F20100101+Firefox%2F99.0'
+    #headers = '&Accept-Language=de%2Cen-US%3Bq%3D0.7%2Cen%3Bq%3D0.3&Accept=%2A%2F%2A&User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A99.0%29+Gecko%2F20100101+Firefox%2F99.0'
+    headers = '&Accept-Language=de%2Cde-DE%3Bq%3D0.9%2Cen%3Bq%3D0.8%2Cen-GB%3Bq%3D0.7%2Cen-US%3Bq%3D0.6&Accept=%2A%2F%2A&User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A99.0%29+Gecko%2F20100101+Firefox%2F99.0'
     params = ParameterHandler()
     if params.exist('sLinks'):
         sUrl = params.getValue('sLinks')
@@ -259,69 +260,59 @@ def showHosters():
         isMatch, aResult = cParser().parse(sHtmlContent, pattern)
     if isMatch:
         for sUrl in aResult:
-            try:
-                if 'kinoger.be' in sUrl:
-                    oRequest = cRequestHandler(sUrl, caching=False, ignoreErrors=True)
+            if 'kinoger.ru' in sUrl:
+                oRequest = cRequestHandler(sUrl, caching=False, ignoreErrors=True)
+                oRequest.addHeaderEntry('Referer', 'https://kinoger.com/')
+                sHtmlContent = oRequest.request() # Durchsucht sHtml Content
+                if isMatch:
+                    decryptHtmlContent = content_decryptor(sHtmlContent)
+                    isMatch, hUrl = cParser.parseSingleResult(decryptHtmlContent, 'sources.*?file.*?(http[^"]+)')
+                if isMatch:
+                    hUrl = hUrl.replace('\\', '')
+                    oRequest = cRequestHandler(hUrl, caching=False, ignoreErrors=True)
                     oRequest.addHeaderEntry('Referer', 'https://kinoger.com/')
-                    sHtmlContent = oRequest.request() # Durchsucht sHtml Content
-                    isMatch, packed = cParser.parseSingleResult(sHtmlContent, '(eval\s*\(function.*?)</script>')
-                    if isMatch:
-                        sHtmlContent = jsunpacker.unpack(packed)
-                    isMatch, j = cParser.parse(sHtmlContent, 'ct":"([^"]+)","iv":"([^"]+)","s":"([^"]+)')
-                    if isMatch:
-                        try:
-                            ciphertext = base64.b64decode(j[0][0])
-                            salt = binascii.unhexlify(j[0][2])
-                            password = 'XOmurdOgNnjMwYah'.encode('utf-8')
-                            sHtmlContent = cUtil.evp_decode(ciphertext, password, salt)
-                        except Exception:
-                            sHtmlContent = ''
-                    isMatch, hUrl = cParser.parseSingleResult(sHtmlContent, 'sources.*?file.*?(http[^"]+)')
-                    if isMatch:
-                        hUrl = hUrl.replace('\\', '')
-                        oRequest = cRequestHandler(hUrl, caching=False, ignoreErrors=True)
-                        oRequest.addHeaderEntry('Referer', 'https://kinoger.be/')
-                        oRequest.addHeaderEntry('Origin', 'https://kinoger.be')
-                        oRequest.removeNewLines(False)
-                        sHtmlContent = oRequest.request()
-                        pattern = 'RESOLUTION=.*?x(\d+).*?\n([^#"]+)'
-                        isMatch, aResult = cParser.parse(sHtmlContent, pattern)
-                    if isMatch:
-                        for sQuality, sUrl in aResult:
-                            sUrl = (hUrl.split('video')[0].strip() + sUrl.strip())
-                            sUrl = sUrl + '|Origin=https%3A%2F%2Fkinoger.be&Referer=https%3A%2F%2Fkinoger.be%2F' + headers
-                            hoster = {'link': sUrl, 'name': 'Kinoger.be [I][%sp][/I]' % sQuality, 'quality': sQuality, 'resolveable': True}
-                            hosters.append(hoster)
+                    oRequest.addHeaderEntry('Origin', 'https://kinoger.com')
+                    oRequest.removeNewLines(False)
+                    sHtmlContent = oRequest.request()
+                    pattern = 'RESOLUTION=.*?x(\d+).*?\n([^#"]+)'
+                    isMatch, aResult = cParser.parse(sHtmlContent, pattern)
+                if isMatch:
+                    for sQuality, sUrl in aResult:
+                        sUrl = (hUrl.split('video')[0].strip() + sUrl.strip())
+                        sUrl = sUrl + '|verifypeer=false&Referer=https%3A%2F%2Fkinoger.ru%2F&Origin=https%3A%2F%2Fkinoger.ru' + headers
+                        hoster = {'link': sUrl, 'name': 'KinoGer [I][%sp][/I]' % sQuality, 'quality': sQuality, 'resolveable': True}
+                        hosters.append(hoster)
 
-                elif 'kinoger.pw' in sUrl: continue # Offline
-                elif 'kinoger.re' in sUrl: continue # Offline
-                elif 'start.u' in sUrl: continue # Offline
-                elif 'delivery' in sUrl: continue
-                elif 'cdn0' in sUrl: continue
-                elif 'kinoger.ru' in sUrl: continue # Cloudflare aktiv
-                elif 'hd-stream.to' in sUrl: continue # Offline
-                elif 'protonvideo' in sUrl: continue # Offline
+            # Ausschluss alter defekter Hoster
+            elif 'kinoger.pw' in sUrl: continue # Offline
+            elif 'kinoger.re' in sUrl: continue # Offline
+            elif 'kinoger.be' in sUrl: continue  # Offline
+            elif 'start.u' in sUrl: continue # Offline
+            elif 'delivery' in sUrl: continue # Offline
+            elif 'cdn0' in sUrl: continue # Offline
+            elif 'hd-stream.to' in sUrl: continue # Offline
+            elif 'protonvideo' in sUrl: continue # Offline
 
-                else:
-                    sQuality = '720p'
-                    sName = cParser.urlparse(sUrl)
-                    for x in (('Kinoger.Be', 'StreamHide'), ('Fsst.Online', 'SecVideo')):
-                        sName = sName.replace(*x)
-                    hoster = {'link': sUrl + 'DIREKT', 'name': sName, 'displayedName': '%s [I][%s][/I]' % (sName, sQuality), 'quality': sQuality, 'resolveable': True}
-                    hosters.append(hoster)
-            except Exception:
-                pass
+            else: # Alle anderen Hoster
+                sQuality = '720'
+                sName = cParser.urlparse(sUrl)
+                if cConfig().isBlockedHoster(sName)[0]: continue  # Hoster aus settings.xml oder deaktivierten Resolver ausschließen
+                hoster = {'link': sUrl + 'DIREKT', 'name': sName, 'displayedName': '%s [I][%sp][/I]' % (sName, sQuality), 'quality': sQuality, 'resolveable': True}
+                hosters.append(hoster)
+
+    if not isMatch:
+        return
+
     if hosters:
+        if cConfig().getSetting('presortHoster') == 'true':
+            # Sortiere Hosterliste nach Qualität greift nicht aus hoster.py warum auch immer
+            hosters = sorted(hosters, key=lambda k: int(k['quality']), reverse=True)
         hosters.append('getHosterUrl')
-        return hosters
+    return hosters
 
 
 def getHosterUrl(sUrl=False):
     if sUrl.endswith('DIREKT'):
-        if 'kinoger.be' in sUrl:
-            sUrl = sUrl.replace('https://kinoger.be/', 'https://streamhide.com/')
-            return [{'streamUrl': sUrl[:-6], 'resolved': False}]
-
         Request = cRequestHandler(sUrl, caching=False)
         Request.request()
         sUrl = Request.getRealUrl()  # hole reale URL von der Umleitung
@@ -342,15 +333,58 @@ def _search(oGui, sSearchText):
     showEntries(URL_MAIN, oGui, sSearchText)
 
 
-def get_streamsburl(host, media_id): # StreamSB Url Abfrage
-    # Copyright (c) 2019 vb6rocod
+def _0xe35c(d, e, f):
+    g = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/")
+    h = g[:e]
+    i = g[:f]
+    j = sum([h.index(b) * (e ** c) for c, b in enumerate(d[::-1])])
+    k = ""
+    while j > 0:
+        k = i[j % f] + k
+        j = (j - (j % f)) // f
+    return int(k) if k.isdigit() else 0
 
-    def makeid(length):
-        t = string.ascii_letters + string.digits
-        return ''.join([random.choice(t) for _ in range(length)])
 
-    x = '{0}||{1}||{2}||streamsb'.format(makeid(12), media_id, makeid(12))
-    c1 = binascii.hexlify(x.encode('utf8')).decode('utf8')
-    x = '7Vd5jIEF2lKy||nuewwgxb1qs'
-    c2 = binascii.hexlify(x.encode('utf8')).decode('utf8')
-    return 'https://{0}/{1}7/{2}'.format(host, c2, c1)
+def _0xc32f(p, l, a, y, e, r):
+    r = ""
+    for i in range(len(p)):
+        s = ""
+        while p[i] != a[e]:
+            s += p[i]
+            i += 1
+        for j in range(len(a)):
+            s = s.replace(a[j], str(j))
+        value = _0xe35c(s, e, 10) - y
+        if 0 <= value < 0x110000:
+            r += chr(value)
+    return r
+
+
+def decode_content(ciphertext_b64, password, salt_hex):
+    pwd = password.encode('utf-8')
+    salt = binascii.unhexlify(salt_hex)
+    key_size, iv_size = 32, 16
+    temp, fd = b'', b''
+    while len(fd) < key_size + iv_size:
+        temp = hashlib.md5(temp + pwd + salt).digest()
+        fd += temp
+    key, iv = fd[0:key_size], fd[key_size:key_size + iv_size]
+    decrypter = pyaes.Decrypter(pyaes.AESModeOfOperationCBC(key, iv))
+    plain_text = decrypter.feed(base64.b64decode(ciphertext_b64)) + decrypter.feed()
+    return plain_text.decode("utf-8")
+
+
+def content_decryptor(html_content):
+    match = re.compile(r'ct":"([^"]+)","iv":"([^"]+)","s":"([^"]+)[\s\S]+?;eval[\s\S]+?\"([^)]+)', re.DOTALL).findall(html_content)
+    if match:
+        ciphertext_b64 = match[0][0]
+        salt_hex = match[0][2]
+        password_data = match[0][3]
+        params = password_data.strip('"').split(',')
+        p, l, a, y, e, r = map(lambda x: int(x) if x.isdigit() else x.strip(' "'), params)
+        password_js = _0xc32f(p, l, a, y, e, r)
+        match = re.compile(r'''JScripts, '([^']+)''', re.DOTALL).search(password_js)
+        if match:
+            password = match.group(1)
+            return decode_content(ciphertext_b64, password, salt_hex)
+    return 'Error'
