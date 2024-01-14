@@ -436,7 +436,6 @@
 					<control type="toggle"/>
 				</setting>
 			</group>
-			<!-- Test
 			<group id="einfach" label="30723">
 				<setting id="plugin_einfach" type="boolean" label="30050" help="">
 					<level>0</level>
@@ -451,7 +450,7 @@
 					</dependencies>
 					<control type="toggle"/>
 				</setting>
-
+				<!-- Domain Überprüfung mit automatischer und manueller Anpassung -->
 				<setting id="plugin_einfach_checkDomain" type="boolean" label="30277">
 					<level>3</level>
 					<default>True</default>
@@ -476,7 +475,6 @@
 					</control>
 				</setting>
 			</group>
-			-->
 			<group id="filmkiste" label="30705">
 				<setting id="plugin_filmkiste" type="boolean" label="30050" help="">
 					<level>0</level>
