@@ -1,4 +1,14 @@
-[B]Version: 4.0.9 Nightly 5[/B]
+[B]Version: 4.0.9 Nightly 6[/B]
+
+15.01.2024
+
+ - [CineClix] Domain Anpassung
+ - [Einfach.to] Qualität hinzugefügt
+ - [Moflix-Stream] Release Jahr hinzugefügt
+   Kollektionen, Neues und Blockbuster hinzugefügt
+ - [PluginHandler] Bei falscher Umleitungsdomain settings Eintrag löschen
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR
 
 14.01.2024
 

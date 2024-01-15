@@ -1208,6 +1208,10 @@ msgctxt "#30542"
 msgid "All Movies"
 msgstr ""
 
+msgctxt "#30543"
+msgid "Collection"
+msgstr ""
+
 ############### Site Plugins ###############
 
 msgctxt "#30700"

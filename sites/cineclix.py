@@ -26,9 +26,9 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
 
 # Domain Abfrage
-DOMAIN = cConfig().getSetting('plugin_' + SITE_IDENTIFIER + '.domain', 'cineclix.de')
+DOMAIN = cConfig().getSetting('plugin_' + SITE_IDENTIFIER + '.domain', 'cineclix.in')
 URL_MAIN = 'https://' + DOMAIN + '/'
-# URL_MAIN = 'https://cineclix.de/'
+# URL_MAIN = 'https://cineclix.in/'
 # Movie / Series / Search Links
 URL_MOVIES = URL_MAIN + 'api/v1/channel/movies?channelType=channel&restriction=&paginate=simple'
 URL_TOP_MOVIES = URL_MAIN + 'api/v1/channel/top-10-filme-diese-woche?channelType=channel&restriction=&paginate=simple'
