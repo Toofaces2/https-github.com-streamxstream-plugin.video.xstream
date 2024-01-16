@@ -215,13 +215,16 @@ def showHosters():
     pattern = '<ul class="mirror">(.*?)</ul>'  # Alle Einträge in dem Bereich suchen
     isMatch, sHtmlContainer = cParser.parseSingleResult(sHtmlContent, pattern)
     if isMatch:
-        isMatch, aResult = cParser.parse(sHtmlContainer, 'data-href="(h[^"]+).*?>([^<]+)')  # sUrl + sName
+        isMatch, aResult = cParser.parse(sHtmlContainer, 'data-href="(h[^"]+).*?>([^<]+)\s')  # sUrl + sName
+        # 1. Link https://einfach.to/filme/saw-x/   2. Link https://einfach.to/filme/saw-x/mirror/1/ usw.
     if not isMatch: return
-    sQuality = '720'
+    sQuality = '720p'
     for sUrl, sName in aResult:
-        if 'Trailer' in sName: continue  # Trailer ausblenden
-        #if cConfig().isBlockedHoster(sName)[0]: continue # Hoster aus settings.xml oder deaktivierten Resolver ausschließen
-        hoster = {'link': sUrl, 'name': sName, 'displayedName': '%s [I][%sp][/I]' % (sName, sQuality), 'quality': sQuality}
+        if 'Traile' in sName: continue  # Trailer ausblenden
+        if 'Stream in HD' in sName:
+            sName = sName.replace('Stream in HD', 'MP4Player.site') # Name des Real Links (wurde replaced da isBlockedHoster nur Array 0 nimmt)
+        if cConfig().isBlockedHoster(sName)[0]: continue # Hoster aus settings.xml oder deaktivierten Resolver ausschließen
+        hoster = {'link': sUrl, 'name': sName, 'displayedName': '%s [I][%s][/I]' % (sName, sQuality), 'quality': sQuality, 'resolveable': True}
         hosters.append(hoster)
     if hosters:
         hosters.append('getHosterUrl')
@@ -229,9 +232,11 @@ def showHosters():
 
 
 def getHosterUrl(sUrl=False):
+    #Hole aus dem Hoster Link die Eingebettete URL und nutze Sie als Stream Url
     Request = cRequestHandler(sUrl, caching=False)
     sHtmlContent = Request.request()
     pattern = 'pembed".*?<iframe.*?src="(http[^"]+)'
+    # reale Url https://mp4player.site/watch?v=YIBCA3FN
     isMatch, sUrl = cParser.parseSingleResult(sHtmlContent, pattern)
     return [{'streamUrl': sUrl, 'resolved': False}]
 

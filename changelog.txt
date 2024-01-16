@@ -1,4 +1,11 @@
-[B]Version: 4.0.9 Nightly 6[/B]
+[B]Version: 4.0.9 Nightly 7[/B]
+
+16.01.2024
+
+ - [Hoster] Überarbeitung Hoster Sortierung
+ - [Einfach.to] Ausschluss aus Hoster Priorität
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR
 
 15.01.2024
 

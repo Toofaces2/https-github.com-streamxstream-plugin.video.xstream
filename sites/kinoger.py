@@ -304,9 +304,6 @@ def showHosters():
         return
 
     if hosters:
-        if cConfig().getSetting('presortHoster') == 'true':
-            # Sortiere Hosterliste nach Qualität greift nicht aus hoster.py warum auch immer
-            hosters = sorted(hosters, key=lambda k: int(k['quality']), reverse=True)
         hosters.append('getHosterUrl')
     return hosters
 

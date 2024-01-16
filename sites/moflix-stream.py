@@ -202,7 +202,6 @@ def showEpisodes(sGui=False):
 
 
 def showSearchEntries(entryUrl=False, sGui=False, sSearchText=''):
-
     oGui = sGui if sGui else cGui()
     params = ParameterHandler()
     # Parameter laden
