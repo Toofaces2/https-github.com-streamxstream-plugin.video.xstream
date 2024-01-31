@@ -5,7 +5,7 @@
  - [Hoster] Überarbeitung Hoster Sortierung
  - [Einfach.to] Ausschluss aus Hoster Priorität
 
-[COLOR cyan]________________________________________________________________________________________[/COLOR
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 15.01.2024
 
@@ -15,13 +15,13 @@
    Kollektionen, Neues und Blockbuster hinzugefügt
  - [PluginHandler] Bei falscher Umleitungsdomain settings Eintrag löschen
 
-[COLOR cyan]________________________________________________________________________________________[/COLOR
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 14.01.2024
 
  - [Einfach.to] Seite hinzugefügt
 
-[COLOR cyan]________________________________________________________________________________________[/COLOR
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 13.01.2024
 
