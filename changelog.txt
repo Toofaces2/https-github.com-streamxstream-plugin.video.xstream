@@ -2,7 +2,8 @@
 
 08.02.2024
 
- -[Tools] interne Erweiterung
+ - [Tools] interne Erweiterung
+ - [CineClix] Fix Neue Serien / Top 10 der Woche
 
 [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
