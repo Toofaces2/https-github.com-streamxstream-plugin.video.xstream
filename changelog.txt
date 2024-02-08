@@ -1,14 +1,9 @@
-[B]Version: 4.0.9 Nightly 9[/B]
-
-09.02.2024
-
- - [intern] Code optimiert
-
-[COLOR cyan]________________________________________________________________________________________[/COLOR]
+[B]Version: 4.0.9 Nightly 8[/B]
 
 08.02.2024
 
  - [Tools] interne Erweiterung
+ - [CineClix] Fix Neue Serien / Top 10 der Woche
 
 [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
