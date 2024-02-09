@@ -2,8 +2,8 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-    #showGenre:    48 Stunden
-    #showEntries:   6 Stunden
+#    showGenre:    48 Stunden
+#    showEntries:   6 Stunden
 
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
@@ -16,23 +16,23 @@ import json
 
 SITE_IDENTIFIER = 'internetarchive'
 SITE_NAME = 'Internet Archive'
-SITE_ICON = 'internetarchive.png' #ToDo Icon ändern
+SITE_ICON = 'internetarchive.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
 
 # Domain Abfrage
-DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'archive.org')
+DOMAIN = cConfig().getSetting('plugin_' + SITE_IDENTIFIER + '.domain', 'archive.org')
 URL_MAIN = 'https://' + DOMAIN
 URL_MOVIE = URL_MAIN + '/details/'
 URL_SEARCH = URL_MAIN + '/advancedsearch.php?q=%s'
 
 
-def load(): # Menu structure of the site plugin
+def load():  # Menu structure of the site plugin
     logger.info('Load %s' % SITE_NAME)
-    params = ParameterHandler()
+    #params = ParameterHandler() ToDo: Reserviert für zukünftige Menü-Einträge
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30520), SITE_IDENTIFIER, 'showSearch'))   # Search
     cGui().setEndOfDirectory()
 

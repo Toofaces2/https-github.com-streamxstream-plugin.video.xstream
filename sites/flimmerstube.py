@@ -2,11 +2,9 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-    #showGenre:    48 Stunden
-    #showEntries:   6 Stunden
-# 2022-08-26 Heptamer - Regex Fix Zeile 117
-# 2022-10-05 Heptamer - Fix für Filme mit Direktlink Zeile  Zeile 128-136
-# 2023-10-22 Heptamer - Vorwärts Blättern funktioniert nicht behoben (requesthandler)
+#   showGenre:    48 Stunden
+#   showEntries:   6 Stunden
+
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
 from resources.lib.handler.requestHandler import cRequestHandler

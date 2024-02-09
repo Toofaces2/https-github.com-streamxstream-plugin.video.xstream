@@ -4,10 +4,10 @@
 # Sprachauswahl für Hoster enthalten.
 # Ajax Suchfunktion enthalten.
 # HTML LangzeitCache hinzugefügt
-    #showValue:     24 Stunden
-    #showAllSeries: 24 Stunden
-    #showEpisodes:   4 Stunden
-    #SSsearch:      24 Stunden
+#   showValue:     24 Stunden
+#   showAllSeries: 24 Stunden
+#   showEpisodes:   4 Stunden
+#   SSsearch:      24 Stunden
     
 import xbmcgui
 
@@ -359,7 +359,6 @@ def _search(oGui, sSearchText):
 
 
 def SSsearch(sGui=False, sSearchText=False):
-    from json import loads
     oGui = sGui if sGui else cGui()
     params = ParameterHandler()
     params.getValue('sSearchText')

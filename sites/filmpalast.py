@@ -3,9 +3,9 @@
 # Always pay attention to the translations in the menu!
 # Sprachauswahl für Filme
 # HTML LangzeitCache hinzugefügt
-    #showValue:     24 Stunden
-    #showEntries:    6 Stunden
-    #showEpisodes:   4 Stunden
+#   showValue:     24 Stunden
+#   showEntries:    6 Stunden
+#   showEpisodes:   4 Stunden
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
 from resources.lib.handler.requestHandler import cRequestHandler

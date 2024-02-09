@@ -2,14 +2,13 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-    #showGenre:     48 Stunden
-    #showYears:     48 Stunden
-    #showEpisodes:   4 Stunden
-# 2023-03-20 Hep
+# showGenre:     48 Stunden
+# showYears:     48 Stunden
+# showEpisodes:   4 Stunden
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
 from resources.lib.handler.requestHandler import cRequestHandler
-from resources.lib.tools import logger, cParser, cUtil
+from resources.lib.tools import logger, cParser
 from resources.lib.gui.guiElement import cGuiElement
 from resources.lib.config import cConfig
 from resources.lib.gui.gui import cGui

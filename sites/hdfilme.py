@@ -2,9 +2,9 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-    #showGenre:     48 Stunden
-    #showYears:     48 Stunden
-    #showEpisodes:   4 Stunden
+#   showGenre:     48 Stunden
+#   showYears:     48 Stunden
+#   showEpisodes:   4 Stunden
 
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
