@@ -34,8 +34,8 @@ URL_MOVIES = URL_MAIN + 'api/v1/channel/movies?channelType=channel&restriction=&
 URL_TOP_MOVIES = URL_MAIN + 'api/v1/channel/top-10-filme-diese-woche?channelType=channel&restriction=&paginate=simple'
 URL_NEW_MOVIES = URL_MAIN + 'api/v1/channel/neu-hinzugefuegt?channelType=channel&restriction=&paginate=simple'
 URL_SERIES = URL_MAIN + 'api/v1/channel/series?channelType=channel&restriction=&paginate=simple'
-URL_TOP_SERIES = URL_MAIN + '/api/v1/channel/top-10-serien-diese-woche?channelType=channel&restriction=&paginate=simple'
-URL_NEW_SERIES = URL_MAIN + '/api/v1/channel/neue-serien?channelType=channel&restriction=&paginate=simple'
+URL_TOP_SERIES = URL_MAIN + 'api/v1/channel/top-10-serien-diese-woche?channelType=channel&restriction=&paginate=simple'
+URL_NEW_SERIES = URL_MAIN + 'api/v1/channel/neue-serien?channelType=channel&restriction=&paginate=simple'
 URL_SEARCH = URL_MAIN + 'api/v1/search/%s?query=%s&limit=8'
 # Genre
 URL_VALUE = URL_MAIN + 'api/v1/channel/%s?channelType=channel&restriction=&paginate=simple'
