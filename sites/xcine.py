@@ -18,7 +18,7 @@ SITE_IDENTIFIER = 'xcine'
 SITE_NAME = 'xCine'
 SITE_ICON = 'xcinetop.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
@@ -26,7 +26,7 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 # Domain Abfrage
 DOMAIN = cConfig().getSetting('plugin_' + SITE_IDENTIFIER + '.domain', 'xcine.click')
 URL_MAIN = 'https://' + DOMAIN + '/'
-#URL_MAIN = 'https://xcine.click/'
+# URL_MAIN = 'https://xcine.click/'
 URL_NEW = URL_MAIN + 'kinofilme-online/'
 URL_KINO = URL_MAIN + 'aktuelle-kinofilme-im-kino/'
 URL_MOVIES = URL_MAIN + 'kinofilme-online'

@@ -1,4 +1,17 @@
-[B]Version: 4.0.9 Nightly 10[/B]
+[B]Version: 4.0.9 Nightly 11[/B]
+
+22.02.2024
+
+ - [Allgemein] Code Optimierungen
+ - [Netzkino] vollständig überarbeitet
+ - [Kinoger] settings.xml Globale Suche deaktiviert
+ - [HDFilme] Domain Aktualisierung
+ - [Kinox] Domain Aktualisierung
+ - [KKiste] Domain Aktualisierung
+ - [Moflix] Kollektion hinzugefügt
+ - [Movie4k] Domain Aktualisierung
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 18.02.2024
 

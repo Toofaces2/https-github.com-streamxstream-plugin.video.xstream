@@ -2,9 +2,10 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-#    showGenre:    48 Stunden
-#    showEntries:   6 Stunden
+# showGenre:    48 Stunden
+# showEntries:   6 Stunden
 
+import json
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
 from resources.lib.handler.requestHandler import cRequestHandler
@@ -12,7 +13,6 @@ from resources.lib.tools import logger, cParser
 from resources.lib.gui.guiElement import cGuiElement
 from resources.lib.config import cConfig
 from resources.lib.gui.gui import cGui
-import json
 
 SITE_IDENTIFIER = 'internetarchive'
 SITE_NAME = 'Internet Archive'
@@ -30,11 +30,12 @@ URL_MOVIE = URL_MAIN + '/details/'
 URL_SEARCH = URL_MAIN + '/advancedsearch.php?q=%s'
 
 
-def load():  # Menu structure of the site plugin
+def load(): # Menu structure of the site plugin
     logger.info('Load %s' % SITE_NAME)
     #params = ParameterHandler() ToDo: Reserviert für zukünftige Menü-Einträge
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30520), SITE_IDENTIFIER, 'showSearch'))   # Search
     cGui().setEndOfDirectory()
+
 
 def showEntries(entryUrl=False, sGui=False, sSearchText=False):
     oGui = sGui if sGui else cGui()
@@ -85,7 +86,6 @@ def showEntries(entryUrl=False, sGui=False, sSearchText=False):
         #oGui.setView('tvshows' if isTvshow else 'movies')
         oGui.setView('movies')
         oGui.setEndOfDirectory()
-
 
 
 def showHosters():

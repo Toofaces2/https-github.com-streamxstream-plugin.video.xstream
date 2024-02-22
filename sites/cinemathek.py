@@ -28,14 +28,14 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 # Domain Abfrage
 DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'cinemathek.net')
 URL_MAIN = 'https://' + DOMAIN + '/'
-#URL_MAIN = 'https://cinemathek.net/'
+# URL_MAIN = 'https://cinemathek.net/'
 URL_MOVIES = URL_MAIN + 'filme/'
 URL_SERIES = URL_MAIN + 'serien/'
 URL_NEW_EPISODES = URL_MAIN + 'episoden/'
 URL_SEARCH = URL_MAIN + '?s=%s'
 
 
-def load():
+def load(): # Menu structure of the site plugin
     logger.info('Load %s' % SITE_NAME)
     params = ParameterHandler()
     params.setParam('sUrl', URL_MOVIES)

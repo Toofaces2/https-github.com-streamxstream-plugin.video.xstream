@@ -24,14 +24,14 @@ SITE_IDENTIFIER = 'serienstream'
 SITE_NAME = 'SerienStream'
 SITE_ICON = 'serienstream.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
 
 # Domain Abfrage
 domain = cConfig().getSetting('plugin_serienstream.domain') # Domain Auswahl über die xStream Einstellungen möglich
-#URL_MAIN = 'https://s.to/'
+# URL_MAIN = 'https://s.to/'
 if domain == "186.2.175.5":
     URL_MAIN = 'http://' + domain
     proxy = 'true'

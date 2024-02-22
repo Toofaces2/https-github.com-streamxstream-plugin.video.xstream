@@ -2,10 +2,10 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-#   showGenre:     48 Stunden
-#   showEntries:    6 Stunden
-#   showSeasons:    6 Stunden
-#   showEpisodes:   4 Stunden
+# showGenre:     48 Stunden
+# showEntries:    6 Stunden
+# showSeasons:    6 Stunden
+# showEpisodes:   4 Stunden
 
 import base64
 import binascii
@@ -25,7 +25,7 @@ SITE_IDENTIFIER = 'kinoger'
 SITE_NAME = 'Kinoger'
 SITE_ICON = 'kinoger.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)

@@ -654,7 +654,7 @@
 				</setting>				
 				<setting id="global_search_kinoger" type="boolean" label="30052">
 					<level>0</level>
-					<default>True</default>
+					<default>False</default>
 					<dependencies>
 						<dependency type="enable" operator="!is" setting="plugin_kinoger">False</dependency>
 					</dependencies>
@@ -663,7 +663,7 @@
 				<!-- Domain Überprüfung mit automatischer und manueller Anpassung -->
 				<setting id="plugin_kinoger_checkDomain" type="boolean" label="30277">
 					<level>3</level>
-					<default>True</default>
+					<default>False</default>
 					<dependencies>
 						<dependency type="enable" operator="!is" setting="plugin_kinoger">false</dependency>
 						<dependency type="visible" operator="!is" setting="plugin_kinoger">false</dependency>
@@ -893,7 +893,7 @@
 				</setting>
 				<setting id="global_search_moflix-stream" type="boolean" label="30052">
 					<level>0</level>
-					<default>True</default>
+					<default>False</default>
 					<dependencies>
 						<dependency type="enable" operator="!is" setting="plugin_moflix-stream">False</dependency>
 					</dependencies>

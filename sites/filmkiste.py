@@ -2,9 +2,9 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-#   showValue:     48 Stunden
-#   showEntries:    6 Stunden
-#   showEpisodes:   4 Stunden
+# showValue:     48 Stunden
+# showEntries:    6 Stunden
+# showEpisodes:   4 Stunden
     
 from resources.lib.handler.ParameterHandler import ParameterHandler
 from resources.lib.handler.requestHandler import cRequestHandler
@@ -17,7 +17,7 @@ SITE_IDENTIFIER = 'filmkiste'
 SITE_NAME = 'Filmkiste'
 SITE_ICON = 'filmkiste.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
@@ -25,7 +25,7 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 # Domain Abfrage
 DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'filmkiste.to')
 URL_MAIN = 'https://' + DOMAIN + '/'
-#URL_MAIN = 'https://filmkiste.to/'
+# URL_MAIN = 'https://filmkiste.to/'
 URL_MOVIES = URL_MAIN + 'movies/'
 URL_SERIES = URL_MAIN + 'tv-series/'
 URL_IMDB = URL_MAIN + 'top-imdb/'

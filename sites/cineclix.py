@@ -43,7 +43,7 @@ URL_VALUE = URL_MAIN + 'api/v1/channel/%s?channelType=channel&restriction=&pagin
 URL_HOSTER = URL_MAIN + 'api/v1/titles/%s?load=images,genres,productionCountries,keywords,videos,primaryVideo,seasons,compactCredits'
 
 
-def load():
+def load(): # Menu structure of the site plugin
     logger.info("Load %s" % SITE_NAME)
     params = ParameterHandler()
     params.setParam('page', (1))

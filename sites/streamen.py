@@ -18,7 +18,7 @@ SITE_IDENTIFIER = 'streamen'
 SITE_NAME = 'Streamen'
 SITE_ICON = 'streamen.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
@@ -26,6 +26,7 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 # Domain Abfrage
 DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'wwv.streamen.cx')
 URL_MAIN = 'https://' + DOMAIN
+# URL_MAIN = 'https://wwv.streamen.cx'
 URL_MOVIES = URL_MAIN + '/filme.html'
 URL_SERIES = URL_MAIN + '/serien.html'
 URL_SEARCH = URL_MAIN + '/recherche?q=%s'

@@ -65,6 +65,8 @@ def showCollections():
     cGui().addFolder(cGuiElement('The Marvel Cinematic Universe Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Marvel Cinematic Universe Collection
     params.setParam('sUrl', URL_VALUE % 'bud-spencer-terence-hill-collection')
     cGui().addFolder(cGuiElement('The Bud Spencer & Terence Hill Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Bud Spencer & Terence Hill Collection
+    params.setParam('sUrl', URL_VALUE % 'the-star-trek-movies-collection')
+    cGui().addFolder(cGuiElement('The Star Trek Kinofilm Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Star Trek Kinofilm Collection
     params.setParam('sUrl', URL_VALUE % 'the-star-wars-collection')
     cGui().addFolder(cGuiElement('The Ultimate Star Wars Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Ultimate Star Wars Collection
     params.setParam('sUrl', URL_VALUE % 'the-james-bond-collection')

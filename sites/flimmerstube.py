@@ -2,8 +2,8 @@
 # Python 3
 # Always pay attention to the translations in the menu!
 # HTML LangzeitCache hinzugefügt
-#   showGenre:    48 Stunden
-#   showEntries:   6 Stunden
+# showGenre:    48 Stunden
+# showEntries:   6 Stunden
 
 
 from resources.lib.handler.ParameterHandler import ParameterHandler
@@ -17,7 +17,7 @@ SITE_IDENTIFIER = 'flimmerstube'
 SITE_NAME = 'Flimmerstube'
 SITE_ICON = 'flimmerstube.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
@@ -25,7 +25,7 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 # Domain Abfrage
 DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'flimmerstube.com')
 URL_MAIN = 'http://' + DOMAIN
-#URL_MAIN = 'http://flimmerstube.com'
+# URL_MAIN = 'http://flimmerstube.com'
 URL_MOVIES = URL_MAIN + '/video/vic/alle_filme'
 URL_SEARCH = URL_MAIN + '/video/shv'
 

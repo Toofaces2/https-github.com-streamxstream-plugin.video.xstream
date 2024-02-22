@@ -17,7 +17,7 @@ SITE_IDENTIFIER = 'streamcloud'
 SITE_NAME = 'Streamcloud'
 SITE_ICON = 'streamcloud.png'
 
-#Global search function is thus deactivated!
+# Global search function is thus deactivated!
 if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     SITE_GLOBAL_SEARCH = False
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
