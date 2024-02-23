@@ -1,4 +1,11 @@
-[B]Version: 4.0.9 Nightly 11[/B]
+[B]Version: 4.0.9 Nightly 12[/B]
+
+23.02.2024
+
+ - [Filmkiste] Menüeintrag Filme/Serien überarbeitet
+
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 22.02.2024
 

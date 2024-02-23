@@ -26,8 +26,8 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'filmkiste.to')
 URL_MAIN = 'https://' + DOMAIN + '/'
 # URL_MAIN = 'https://filmkiste.to/'
-URL_MOVIES = URL_MAIN + 'movies/'
-URL_SERIES = URL_MAIN + 'tv-series/'
+URL_MOVIES = URL_MAIN + 'category/movies/'
+URL_SERIES = URL_MAIN + 'category/tv-series/'
 URL_IMDB = URL_MAIN + 'top-imdb/'
 URL_SEARCH = URL_MAIN + '?s=%s'
 
