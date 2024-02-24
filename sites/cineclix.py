@@ -49,6 +49,10 @@ def load(): # Menu structure of the site plugin
     params.setParam('page', (1))
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30502), SITE_IDENTIFIER, 'showMovieMenu'), params)  # Movies
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30511), SITE_IDENTIFIER, 'showSeriesMenu'), params)  # Series
+    params.setParam('sUrl', URL_VALUE % 'clixters-ausbeute')
+    cGui().addFolder(cGuiElement('Clixter´s Echo', SITE_IDENTIFIER, 'showEntries'), params)  # Clixter´s Echo
+    params.setParam('sUrl', URL_VALUE % 'trending-tv')
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30544) + 'CineClix', SITE_IDENTIFIER, 'showEntries'), params)  # Clixter´s Echo
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30506), SITE_IDENTIFIER, 'showGenre'), params)  # Genre
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30520), SITE_IDENTIFIER, 'showSearch'))  # Search
     cGui().setEndOfDirectory()
@@ -84,6 +88,10 @@ def showGenre():
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30801), SITE_IDENTIFIER, 'showEntries'), params)  # Animation
     params.setParam('sUrl', URL_VALUE % 'abenteuer')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30807), SITE_IDENTIFIER, 'showEntries'), params)  # Abenteuer
+    params.setParam('sUrl', URL_VALUE % 'disney-pixar')
+    cGui().addFolder(cGuiElement('Disney & Pixar', SITE_IDENTIFIER, 'showEntries'), params)  # Disney & Pixar
+    params.setParam('sUrl', URL_VALUE % 'global-cinema-english-language-streams')
+    cGui().addFolder(cGuiElement('English', SITE_IDENTIFIER, 'showEntries'), params)  # Disney & Pixar
     params.setParam('sUrl', URL_VALUE % 'horror-filme')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30802), SITE_IDENTIFIER, 'showEntries'), params)  # Horror
     params.setParam('sUrl', URL_VALUE % 'kino-filme-banner')
@@ -136,11 +144,13 @@ def showEntries(entryUrl=False, sGui=False):
         if 'description' in i and i['description'] != '': oGuiElement.setDescription(
             i['description'])  # Suche nach Desc wenn nicht leer dann setze GuiElement
         # sThumbnail = i['poster']
-        if 'poster' in i and i['poster'] != '': oGuiElement.setThumbnail(
-            i['poster'])  # Suche nach Desc wenn nicht leer dann setze GuiElement
+        if 'poster' in i and i['poster'] != '':
+            oGuiElement.setThumbnail(i['poster'])  # Suche nach Poster wenn nicht leer dann setze GuiElement
+            if 'storage' in i['poster'] != '': # Wenn der Speicherort intern liegt
+                oGuiElement.setThumbnail(URL_MAIN + i['poster'])
         # sFanart = i['backdrop']
-        if 'backdrop' in i and i['backdrop'] != '': oGuiElement.setFanart(
-            i['backdrop'])  # Suche nach Desc wenn nicht leer dann setze GuiElement
+        if 'backdrop' in i and i['backdrop'] != '':
+            oGuiElement.setFanart(i['backdrop'])  # Suche nach Fanart wenn nicht leer dann setze GuiElement
         oGuiElement.setMediaType('tvshow' if isTvshow else 'movie')
         # Parameter übergeben
         params.setParam('entryUrl', URL_HOSTER % sId)
