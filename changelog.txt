@@ -1,4 +1,10 @@
-[B]Version: 4.0.9 Nightly 13[/B]
+[B]Version: 4.0.9 Nightly 14[/B]
+
+28.02.2024
+
+ - [internet Archive] Sprachfilter (Deutsch, Englisch, Alle Sprachen) hinzugefügt (über Einstellungen)
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 24.02.2024
 

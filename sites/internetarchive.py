@@ -53,13 +53,30 @@ def showEntries(entryUrl=False, sGui=False, sSearchText=False):
         return
 
     # Filter nach eingestellter Sprache in xstream laden
-    sLanguage = cConfig().getSetting('prefLanguage') #ToDo Sprachfilter aktivieren
+    sLanguage = cConfig().getSetting('prefLanguage')
 
     for i in aResults:
         sId = i['identifier']  # ID des Films / Serie für die weitere URL
         sName = i['title']  # Name des Films / Serie
 
         oGuiElement = cGuiElement(sName, SITE_IDENTIFIER, 'showHosters')
+
+        # Resultate aus JSON nach voreingestellter Sprache filtern (Deutsch, Englisch, alle Sprachen)
+        if 'language' in i and i['language'] != '':
+            sLang = i['language']
+            if sLanguage == '1': # Voreingestellte Sprache Deutsch in settings.xml
+                if not sLang in ['ger', 'german']:
+                   continue
+            if sLanguage == '2':  # Voreingestellte Sprache Englisch in settings.xml
+                if not sLang in ['eng', 'english']:
+                    continue
+            if sLanguage == '0': # Alle Sprachen
+                if not sLang in ['ger', 'eng', 'english', '']:
+                    continue
+        else:
+            continue
+        oGuiElement.setLanguage(i['language'])
+
 
 
         #if 'is_series' in i: isTvshow = i['is_series']  # Wenn True dann Serie ToDo Prüfen wie sich Serien verhalten
@@ -69,9 +86,8 @@ def showEntries(entryUrl=False, sGui=False, sSearchText=False):
             oGuiElement.setYear(i['year'])
         if 'description' in i and i['description'] != '':
             oGuiElement.setDescription(i['description'])  # Suche nach Desc wenn nicht leer dann setze GuiElement
-        if 'language' in i and i['language'] != '':
-            if i['language'] == 'ger' or 'eng':
-                oGuiElement.setLanguage(i['language'])
+
+
 
         #oGuiElement.setMediaType('tvshow' if isTvshow else 'movie')
         oGuiElement.setMediaType('movie')
