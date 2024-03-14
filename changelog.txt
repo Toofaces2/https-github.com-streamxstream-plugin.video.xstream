@@ -1,4 +1,12 @@
-[B]Version: 4.0.9 Nightly 14[/B]
+[B]Version: 4.0.9 Nightly 15[/B]
+
+14.03.2024
+
+ - [KinoGer] KinoGer.be überarbeitet
+		KinoGer.pw hinzugefügt
+		KinoGer.ru hinzugefügt THX an Loki1979 für dein Decrypt
+
+[COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 28.02.2024
 
