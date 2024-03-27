@@ -3,7 +3,9 @@
 27.03.2024
 
  - [streamen] Entfernt da offline
-
+ - [Cineclix] Kollektionen hinzugefügt, Code Optimierung
+ - [Moflix-Stream] Kollektion hinzugefügt
+ 
 [COLOR cyan]________________________________________________________________________________________[/COLOR]
 
 14.03.2024
