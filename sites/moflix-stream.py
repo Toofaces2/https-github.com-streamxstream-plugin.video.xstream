@@ -61,6 +61,8 @@ def showCollections():
     params = ParameterHandler()
     params.setParam('sUrl', URL_VALUE % 'the-dc-universum-collection')
     cGui().addFolder(cGuiElement('The DC Superhelden Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The DC Superhelden Collection
+    params.setParam('sUrl', URL_VALUE % 'fast-furious-movie-collection')
+    cGui().addFolder(cGuiElement('The Fast & Furious Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The DC Superhelden Collection
     params.setParam('sUrl', URL_VALUE % 'marvel')
     cGui().addFolder(cGuiElement('The Marvel Cinematic Universe Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Marvel Cinematic Universe Collection
     params.setParam('sUrl', URL_VALUE % 'bud-spencer-terence-hill-collection')

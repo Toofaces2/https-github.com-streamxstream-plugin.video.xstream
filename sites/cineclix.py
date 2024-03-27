@@ -33,6 +33,7 @@ URL_MAIN = 'https://' + DOMAIN + '/'
 URL_MOVIES = URL_MAIN + 'api/v1/channel/movies?channelType=channel&restriction=&paginate=simple'
 URL_TOP_MOVIES = URL_MAIN + 'api/v1/channel/top-10-filme-diese-woche?channelType=channel&restriction=&paginate=simple'
 URL_NEW_MOVIES = URL_MAIN + 'api/v1/channel/neu-hinzugefuegt?channelType=channel&restriction=&paginate=simple'
+URL_MOVIES_COLLECT = URL_MAIN + 'api/v1/channel/film-sammlungen?channelType=channel&restriction=&paginate=simple'
 URL_SERIES = URL_MAIN + 'api/v1/channel/series?channelType=channel&restriction=&paginate=simple'
 URL_TOP_SERIES = URL_MAIN + 'api/v1/channel/top-10-serien-diese-woche?channelType=channel&restriction=&paginate=simple'
 URL_NEW_SERIES = URL_MAIN + 'api/v1/channel/neue-serien?channelType=channel&restriction=&paginate=simple'
@@ -66,6 +67,8 @@ def showMovieMenu():    # Menu structure of movie menu
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30542), SITE_IDENTIFIER, 'showEntries'), params)  # Movies
     params.setParam('sUrl', URL_TOP_MOVIES)
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30539), SITE_IDENTIFIER, 'showEntries'), params)  # Top Movies
+    params.setParam('sUrl', URL_MOVIES_COLLECT)
+    cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30543), SITE_IDENTIFIER, 'showEntries'), params)  # Collections
     cGui().setEndOfDirectory()
 
 
@@ -182,7 +185,7 @@ def showSeasons(sGui=False):
     jSearch = json.loads(oRequest.request()) # Lade JSON aus dem Request der URL
     if not jSearch: return # Wenn Suche erfolglos - Abbruch
     sDesc = jSearch['title']['description'] # Lade Beschreibung aus JSON
-
+    sType = jSearch['title']['name'] # Wenn Filmreihe in sName aus JSON
     #Nachdem Titel und Beschreibung ausgelesen ist, Wechsel der URL um alle Staffeln darzustellen (max. 50 Staffeln)
     token = oRequest.getCookie('XSRF-TOKEN')
     title_id = jSearch['title']['id']
@@ -207,24 +210,34 @@ def showSeasons(sGui=False):
     for i in aResults:
         sId = i['title_id'] # ID ändert sich !!!
         sSeasonNr = str(i['number']) # Staffel Nummer
-        oGuiElement = cGuiElement('Staffel ' + sSeasonNr, SITE_IDENTIFIER, 'showEpisodes')
+        if 'Filmreihe' in sType != '': # Für Filmreihe
+            oGuiElement = cGuiElement('Filmreihe', SITE_IDENTIFIER, 'showEpisodes')
+        else:
+            oGuiElement = cGuiElement('Staffel ' + sSeasonNr, SITE_IDENTIFIER, 'showEpisodes')
         oGuiElement.setMediaType('season')
         oGuiElement.setSeason(sSeasonNr)
-        oGuiElement.setThumbnail(sThumbnail)
+        if 'storage' in sThumbnail != '':  # Wenn der Speicherort intern liegt
+            oGuiElement.setThumbnail(URL_MAIN + sThumbnail)
+        else:
+            oGuiElement.setThumbnail(sThumbnail)
         if sDesc != '': oGuiElement.setDescription(sDesc)
         params.setParam('sSeasonNr', sSeasonNr)
         params.setParam('sId', sId)
+        params.setParam('sType', sType)
         cGui().addFolder(oGuiElement, params, True, total)
     cGui().setView('seasons')
     cGui().setEndOfDirectory()
 
 
 def showEpisodes(sGui=False):
+    #import pydevd
+    #pydevd.settrace('localhost', port=12345, stdoutToServer=True, stderrToServer=True)
     oGui = cGui()
     params = ParameterHandler()
     # Parameter laden
     sId = params.getValue('sId')
     sSeasonNr = params.getValue('sSeasonNr')
+    sType = params.getValue('sType')
     #https://cineclix.de/api/v1/titles/2858/seasons/2?load=episodes,primaryVideo
     sUrl = URL_MAIN + 'api/v1/titles/%s/seasons/%s?load=episodes,primaryVideo' % (sId, sSeasonNr)
     oRequest = cRequestHandler(sUrl)
@@ -242,12 +255,18 @@ def showEpisodes(sGui=False):
         sName = i['name'] # Episoden Titel
         sEpisodeNr = str(i['episode_number']) # Episoden Nummer
         sThumbnail = i['poster'] # Episoden Poster
-        oGuiElement = cGuiElement('Episode ' + sEpisodeNr + ' - ' + sName, SITE_IDENTIFIER, 'showHosters')
+        if 'Filmreihe' in sType != '':  # Für Filmreihe
+            oGuiElement = cGuiElement('Teil ' + sEpisodeNr + ' - ' + sName, SITE_IDENTIFIER, 'showHosters')
+        else:
+            oGuiElement = cGuiElement('Episode ' + sEpisodeNr + ' - ' + sName, SITE_IDENTIFIER, 'showHosters')
         if 'description' in i and i['description'] != '': oGuiElement.setDescription(i['description']) # Suche nach Desc wenn nicht leer dann setze GuiElement
         oGuiElement.setEpisode(sEpisodeNr)
         oGuiElement.setSeason(sSeasonNr)
         oGuiElement.setMediaType('episode')
-        oGuiElement.setThumbnail(sThumbnail)
+        if 'storage' in sThumbnail != '':  # Wenn der Speicherort intern liegt
+            oGuiElement.setThumbnail(URL_MAIN + sThumbnail)
+        else:
+            oGuiElement.setThumbnail(sThumbnail)
         # Parameter setzen
         #https://cineclix.de/api/v1/titles/2858/seasons/2/episodes/2?load=videos,compactCredits,primaryVideo
         params.setParam('entryUrl', URL_MAIN + 'api/v1/titles/%s/seasons/%s/episodes/%s?load=videos,compactCredits,primaryVideo' % (sId, sSeasonNr, sEpisodeNr))
