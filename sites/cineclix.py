@@ -29,16 +29,9 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 DOMAIN = cConfig().getSetting('plugin_' + SITE_IDENTIFIER + '.domain', 'cineclix.in')
 URL_MAIN = 'https://' + DOMAIN + '/'
 # URL_MAIN = 'https://cineclix.in/'
-# Movie / Series / Search Links
-URL_MOVIES = URL_MAIN + 'api/v1/channel/movies?channelType=channel&restriction=&paginate=simple'
-URL_TOP_MOVIES = URL_MAIN + 'api/v1/channel/top-10-filme-diese-woche?channelType=channel&restriction=&paginate=simple'
-URL_NEW_MOVIES = URL_MAIN + 'api/v1/channel/neu-hinzugefuegt?channelType=channel&restriction=&paginate=simple'
-URL_MOVIES_COLLECT = URL_MAIN + 'api/v1/channel/film-sammlungen?channelType=channel&restriction=&paginate=simple'
-URL_SERIES = URL_MAIN + 'api/v1/channel/series?channelType=channel&restriction=&paginate=simple'
-URL_TOP_SERIES = URL_MAIN + 'api/v1/channel/top-10-serien-diese-woche?channelType=channel&restriction=&paginate=simple'
-URL_NEW_SERIES = URL_MAIN + 'api/v1/channel/neue-serien?channelType=channel&restriction=&paginate=simple'
+# Search Links
 URL_SEARCH = URL_MAIN + 'api/v1/search/%s?query=%s&limit=8'
-# Genre
+# Menü / Genre
 URL_VALUE = URL_MAIN + 'api/v1/channel/%s?channelType=channel&restriction=&paginate=simple'
 # Hoster
 URL_HOSTER = URL_MAIN + 'api/v1/titles/%s?load=images,genres,productionCountries,keywords,videos,primaryVideo,seasons,compactCredits'
@@ -61,24 +54,24 @@ def load(): # Menu structure of the site plugin
 
 def showMovieMenu():    # Menu structure of movie menu
     params = ParameterHandler()
-    params.setParam('sUrl', URL_NEW_MOVIES)
+    params.setParam('sUrl', URL_VALUE % 'neu-hinzugefuegt')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30541), SITE_IDENTIFIER, 'showEntries'), params)  # New
-    params.setParam('sUrl', URL_MOVIES)
+    params.setParam('sUrl', URL_VALUE % 'movies')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30542), SITE_IDENTIFIER, 'showEntries'), params)  # Movies
-    params.setParam('sUrl', URL_TOP_MOVIES)
+    params.setParam('sUrl', URL_VALUE % 'top-10-filme-diese-woche')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30539), SITE_IDENTIFIER, 'showEntries'), params)  # Top Movies
-    params.setParam('sUrl', URL_MOVIES_COLLECT)
+    params.setParam('sUrl', URL_VALUE % 'film-sammlungen')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30543), SITE_IDENTIFIER, 'showEntries'), params)  # Collections
     cGui().setEndOfDirectory()
 
 
 def showSeriesMenu():   # Menu structure of series menu
     params = ParameterHandler()
-    params.setParam('sUrl', URL_NEW_SERIES)
+    params.setParam('sUrl', URL_VALUE % 'neue-serien')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30514), SITE_IDENTIFIER, 'showEntries'), params)  # New
-    params.setParam('sUrl', URL_SERIES)
+    params.setParam('sUrl', URL_VALUE % 'series')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30518), SITE_IDENTIFIER, 'showEntries'), params)  # Series
-    params.setParam('sUrl', URL_TOP_SERIES)
+    params.setParam('sUrl', URL_VALUE % 'top-10-serien-diese-woche')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30540), SITE_IDENTIFIER, 'showEntries'), params)  # Top Series
     cGui().setEndOfDirectory()
 
