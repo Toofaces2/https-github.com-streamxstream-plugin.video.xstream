@@ -29,10 +29,7 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 DOMAIN = cConfig().getSetting('plugin_' + SITE_IDENTIFIER + '.domain', 'moflix-stream.xyz')
 URL_MAIN = 'https://' + DOMAIN + '/'
 # URL_MAIN = 'https://moflix-stream.xyz/'
-# Movie / Series / Search Links
-URL_NEW = URL_MAIN + 'api/v1/channel/now-playing?channelType=channel&restriction=&paginate=simple'
-URL_MOVIES = URL_MAIN + 'api/v1/channel/movies?channelType=channel&restriction=&paginate=simple'
-URL_SERIES = URL_MAIN + 'api/v1/channel/trending-tv?channelType=channel&restriction=&paginate=simple'
+# Search Links
 URL_SEARCH = URL_MAIN + 'api/v1/search/%s?query=%s&limit=8'
 # Genre
 URL_VALUE = URL_MAIN + 'api/v1/channel/%s?channelType=channel&restriction=&paginate=simple'
@@ -44,13 +41,13 @@ def load():
     logger.info("Load %s" % SITE_NAME)
     params = ParameterHandler()
     params.setParam('page', (1))
-    params.setParam('sUrl', URL_NEW)
+    params.setParam('sUrl', URL_VALUE % 'now-playing')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30500), SITE_IDENTIFIER, 'showEntries'), params)  # Neues
-    params.setParam('sUrl', URL_MOVIES)
+    params.setParam('sUrl', URL_VALUE % 'movies')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30502), SITE_IDENTIFIER, 'showEntries'), params)  # Movies
     params.setParam('sUrl', URL_VALUE % 'top-rated-movies')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30509), SITE_IDENTIFIER, 'showEntries'), params)  # Top Movies
-    params.setParam('sUrl', URL_SERIES)
+    params.setParam('sUrl', URL_VALUE % 'series')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30511), SITE_IDENTIFIER, 'showEntries'), params)  # Series
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30543), SITE_IDENTIFIER, 'showCollections'), params)  # Collections
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30520), SITE_IDENTIFIER, 'showSearch'))  # Search
@@ -77,6 +74,8 @@ def showCollections():
     cGui().addFolder(cGuiElement('The Olsenbande Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Olsenbande Collection
     params.setParam('sUrl', URL_VALUE % 'the-mission-impossible-collection')
     cGui().addFolder(cGuiElement('The Ethan Hunt Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Ethan Hunt Collection
+    params.setParam('sUrl', URL_VALUE % 'the-jason-bourne-collection')
+    cGui().addFolder(cGuiElement('The Jason Bourne Collection', SITE_IDENTIFIER, 'showEntries'), params)  # The Jason Bourne Collection
     params.setParam('sUrl', URL_VALUE % 'top-kids-liste')
     cGui().addFolder(cGuiElement(cConfig().getLocalizedString(30503), SITE_IDENTIFIER, 'showEntries'), params)  # Kids
     cGui().setEndOfDirectory()
@@ -263,10 +262,22 @@ def showHosters(sGui=False):
         if not sGui: oGui.showInfo()
         return
     for i in aResults:
-        sName = i['name'].split('-')[0].strip()
         sQuality = str(i['quality'])
         if 'None' in sQuality: sQuality = '720p'
         sUrl = i['src']
+        if 'veev' in sUrl: # Link verfälscht es kann dadurch beim Resolve eine Fehlermeldung geben
+            Request = cRequestHandler(sUrl, caching=False)
+            Request.request()
+            sUrl = Request.getRealUrl()  # hole reale URL von der Umleitung
+        if 'Mirror' in i['name']: # Wenn Mirror als sName hole realen Name aus der URL
+            sName = cParser.urlparse(sUrl)
+        else:
+            sName = i['name'].split('-')[0].strip()
+        if 'Moflix-Stream.Click' in sName:
+            sName = 'FileLions'
+        if 'Moflix-Stream.Day' in sName:
+            sName = 'VidGuard'
+        sName = sName.split('.')[0].strip() # Trenne Endung nach . ab
         if cConfig().isBlockedHoster(sUrl)[0]: continue  # Hoster aus settings.xml oder deaktivierten Resolver ausschließen
         if 'youtube' in sUrl: continue # Trailer ausblenden
         hoster = {'link': sUrl, 'name': sName, 'displayedName': '%s [I][%s][/I]' % (sName, sQuality), 'quality': sQuality, 'resolveable': True}
