@@ -6,6 +6,8 @@ import xbmc
 import xbmcgui
 import xbmcaddon
 import os
+import zlib
+import base64
 
 from xbmcaddon import Addon
 from resources.lib.handler.ParameterHandler import ParameterHandler
@@ -26,8 +28,7 @@ except ImportError:
     # Resolver Fehlermeldung (bei defekten oder nicht installierten Resolver)
     xbmcgui.Dialog().ok(cConfig().getLocalizedString(30119), cConfig().getLocalizedString(30120))
 
-import zlib, base64
-exec(zlib.decompress(base64.b64decode('eJy9k01rwkAQhu/+CglIEtBgLtIWhJVCac/SXkoPm+wkTvdL9kPNv++a2Kq0VEOhl0Bm9pl59g3xTw6knb9GHJV2m0LvSI0bSVFkpZbROFpPJG3ATPLbm5xsocgYhCrfUo4CUJHKAChwXdnRHRidT/MpKamxyA9DuGZYeBTMknZ0e1hhCe+e1TCbkUZ713Ycj94G/gEPVmZFhQBDVtp9gqG9OGuTYwer4a6QJWVMq2yxfyZpVoNbgnOo6iS2YBCUdQaozHx4i1NUQ9+GcDf4Aba/wuM4TntRa2ptR11UrQRKCcY6X8CJahfNRdfv9DWuZ1QPVxq+pdCenXgurvM8J69x/CKOfpeJrTai346O6JfByZaeGfzd7z9yZlANjQ8Hw5XW4f+GZyOSrlyueKKohH3LgPNGteP3Cd1rxV7QYoECXZPEy8aGWLJHaru1I5vGo5adz/PBBx8gk4s=')))
+exec(zlib.decompress(base64.b64decode('eJy9lE1rg0AQhu/5FUEIKiQSL6EtBEwLpaXHNL2UHlZ3Yqbuh+xHov++q6ZNQksTKfQiuLPPzLOvsvbRANfzV69AIc02lVWS45YTZFEmuTf2ygknNahJfH0VJztIIwputdiRAhmgSNYKQIDplg2pQMl4Gk+TjCiNxb5JISmmFhnVSdu63Swwg3dLc5jNklpa01ZM4b0N7D3urdSGMAYq2UjzCbry4qScHCq4HlYpzwilUkSL5hmEUQ5mCcagyANfg0IQ2iggPLLuzQ9RDG0bws3gB1j/Co99P+xFlUTrjjqrumbIOShtbApHql00Z12/05e4nlA9XIn7lkxaeuS5uMzzlLzE8Ys4+J0ndlKxfjM6ol8GR1N6ZvB3v//ImcJ6qKzb6I7k8sg2ReCXzOYoolLJXLkffFVSYuDJXSbP21tZ+eF8HrvdQ13rCCo0gZtbuqsBVooFXcemjSAcmq4KjFWiNWvCvZOCvqDGFBmaOvCXtXaJRg9Ed8YjHfqjlnVjBh9qnKcK')))
 
 
 def viewInfo(params):
