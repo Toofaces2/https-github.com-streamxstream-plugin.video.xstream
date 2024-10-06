@@ -18,8 +18,8 @@ from resources.lib.gui.guiElement import cGuiElement
 from resources.lib.config import cConfig
 from resources.lib.gui.gui import cGui
 
-SITE_IDENTIFIER = 'aniworld'
-SITE_NAME = 'AniWorld'
+SITE_IDENTIFIER = 'theync'
+SITE_NAME = 'TheYNC'
 SITE_ICON = 'aniworld.png'
 
 # Global search function is thus deactivated!
@@ -30,18 +30,16 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
 # Domain Abfrage
 DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'aniworld.to')
 URL_MAIN = 'https://' + DOMAIN
-# URL_MAIN = 'https://aniworld.to'
-URL_SERIES = URL_MAIN + '/animes'
-URL_POPULAR = URL_MAIN + '/beliebte-animes'
-URL_NEW_EPISODES = URL_MAIN + '/neue-episoden'
+# URL_MAIN = 'https://theync.com'
+URL_SERIES = URL_MAIN + '/most-recent'
 URL_LOGIN = URL_MAIN + '/login'
 
 
 def load(): # Menu structure of the site plugin
     logger.info('Load %s' % SITE_NAME)
     params = ParameterHandler()
-    username = cConfig().getSetting('aniworld.user')    # Username
-    password = cConfig().getSetting('aniworld.pass')    # Password
+    username = cConfig().getSetting('theync.user')    # Username
+    password = cConfig().getSetting('theync.pass')    # Password
     if username == '' or password == '':                # If no username and password were set, close the plugin!
         xbmcgui.Dialog().ok(cConfig().getLocalizedString(30241), cConfig().getLocalizedString(30263))   # Info Dialog!
     else:
@@ -321,8 +319,8 @@ def showHosters():
 
 def getHosterUrl(hUrl):
     if type(hUrl) == str: hUrl = eval(hUrl)
-    username = cConfig().getSetting('aniworld.user')
-    password = cConfig().getSetting('aniworld.pass')
+    username = cConfig().getSetting('theync.user')
+    password = cConfig().getSetting('theync.pass')
     Handler = cRequestHandler(URL_LOGIN, caching=False)
     Handler.addHeaderEntry('Upgrade-Insecure-Requests', '1')
     Handler.addHeaderEntry('Referer', ParameterHandler().getValue('entryUrl'))
@@ -361,8 +359,8 @@ def SSsearch(sGui=False, sSearchText=False):
     params.getValue('sSearchText')
     oRequest = cRequestHandler(URL_SERIES, caching=True, ignoreErrors=(sGui is not False))
     oRequest.addHeaderEntry('X-Requested-With', 'XMLHttpRequest')
-    oRequest.addHeaderEntry('Referer', 'https://aniworld.to/animes')
-    oRequest.addHeaderEntry('Origin', 'https://aniworld.to')
+    oRequest.addHeaderEntry('Referer', 'https://theync.com/most-recent')
+    oRequest.addHeaderEntry('Origin', 'https://theync.com')
     oRequest.addHeaderEntry('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
     oRequest.addHeaderEntry('Upgrade-Insecure-Requests', '1')
 
@@ -415,8 +413,8 @@ def getMetaInfo(link, title):   # Setzen von Metadata in Suche:
     oGui = cGui()
     oRequest = cRequestHandler(URL_MAIN + link, caching=False)
     oRequest.addHeaderEntry('X-Requested-With', 'XMLHttpRequest')
-    oRequest.addHeaderEntry('Referer', 'https://aniworld.to/animes')
-    oRequest.addHeaderEntry('Origin', 'https://aniworld.to')
+    oRequest.addHeaderEntry('Referer', 'https://theync.com/most-recent')
+    oRequest.addHeaderEntry('Origin', 'https://theync.com')
 
     #GET CONTENT OF HTML
     sHtmlContent = oRequest.request()
