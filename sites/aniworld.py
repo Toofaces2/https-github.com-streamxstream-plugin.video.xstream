@@ -32,7 +32,6 @@ DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'aniworld.t
 URL_MAIN = 'https://' + DOMAIN
 # URL_MAIN = 'https://theync.com'
 URL_SERIES = URL_MAIN + '/most-recent'
-URL_LOGIN = URL_MAIN + '/login'
 
 
 def load(): # Menu structure of the site plugin
@@ -321,7 +320,7 @@ def getHosterUrl(hUrl):
     if type(hUrl) == str: hUrl = eval(hUrl)
     username = cConfig().getSetting('theync.user')
     password = cConfig().getSetting('theync.pass')
-    Handler = cRequestHandler(URL_LOGIN, caching=False)
+    Handler = cRequestHandler(URL_LOGIN, caching=true)
     Handler.addHeaderEntry('Upgrade-Insecure-Requests', '1')
     Handler.addHeaderEntry('Referer', ParameterHandler().getValue('entryUrl'))
     Handler.addParameters('email', username)
