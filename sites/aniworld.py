@@ -28,7 +28,7 @@ if cConfig().getSetting('global_search_' + SITE_IDENTIFIER) == 'false':
     logger.info('-> [SitePlugin]: globalSearch for %s is deactivated.' % SITE_NAME)
 
 # Domain Abfrage
-DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'aniworld.to')
+DOMAIN = cConfig().getSetting('plugin_'+ SITE_IDENTIFIER +'.domain', 'theync.com')
 URL_MAIN = 'https://' + DOMAIN
 # URL_MAIN = 'https://theync.com'
 URL_SERIES = URL_MAIN + '/most-recent'
